@@ -1,16 +1,14 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 # Create your models here.
 
-class Client(models.Model):
-    ClientId = models.AutoField(primary_key=True)
-    ClientUsername = models.CharField(max_length=50)
-    ClientName = models.CharField(max_length=50)
-    ClientAge = models.IntegerField()
-    ClientWeight = models.FloatField()
-    ClientHeight = models.FloatField()
-    ClientGender = models.CharField(max_length=1)
+class User(AbstractUser):
+    UserAge = models.IntegerField()
+    UserWeight = models.FloatField()
+    UserHeight = models.FloatField()
+    UserGender = models.CharField(max_length=1)
 
 
 class Excercise(models.Model):
@@ -28,7 +26,7 @@ class Routine(models.Model):
 
 
 class History(models.Model):
-    HistoryClientId = models.ForeignKey(Client, on_delete=models.CASCADE)
+    HistoryUserId = models.ForeignKey(User, on_delete=models.CASCADE)
     HistoryRoutineId = models.ForeignKey(Routine, on_delete=models.CASCADE)
     HistoryWeight = models.FloatField()
     HistoryDate = models.DateField()
